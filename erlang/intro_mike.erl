@@ -80,11 +80,6 @@ minutes_since_midnight(Time) ->
 
 % Zustand eines Gürteltiers zu einem bestimmten Zeitpunkt
 
-% Ein Tier ist eins der folgenden:
-% - ein Gürteltier ODER
-% - ein Papagei
--type animal() :: #dillo{} | #parrot{}.
-
 % Ein Gürteltier hat folgende Eigenschaften:
 % - tot oder lebendig
 % - Gewicht
@@ -94,6 +89,11 @@ minutes_since_midnight(Time) ->
 % - Satz
 % - Gewicht
 -record(parrot, {sentence :: string(), weight :: number()}).
+
+% Ein Tier ist eins der folgenden:
+% - ein Gürteltier ODER
+% - ein Papagei
+-type animal() :: #dillo{} | #parrot{}.
 
 % Lebendiges Gürteltier, 10kg
 d1() -> #dillo{liveness = alive, weight = 10}.
