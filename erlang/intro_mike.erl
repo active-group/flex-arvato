@@ -63,7 +63,7 @@ dogs_per_leg(Legs) ->
 % Eine Uhrzeit besteht aus:
 % - Stunde
 % - Minute
--record(time, {hour :: 0..23, minute :: 0..59}).
+-record(time, {hour, minute :: 0..59}).
 
 t1() -> #time{hour = 12, minute = 24}. % 12 Uhr 24
 t2() -> #time{hour = 12, minute = 0}. % 12 Uhr 00
@@ -76,3 +76,7 @@ minutes_since_midnight(Time) ->
     Minutes1 = Time#time.hour * 60,
     Minutes2 = (Minutes1 + Time#time.minute),
     Minutes2.
+
+% Ein Gürteltier hat folgende Eigenschaften:
+% - tot oder lebendig
+% - Gewicht
