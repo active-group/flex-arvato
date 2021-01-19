@@ -1,6 +1,6 @@
 -module(intro_mike).
 -export([double/1, double/2, state/1, typical/1,
-    safe_divide/2, dogs_per_leg/1, t1/0, minutes_since_midnight/1]).
+    safe_divide/2, dogs_per_leg/1, t1/0, t2/0 minutes_since_midnight/1]).
 
 % Atome: mike, stefan, error
 % Liste: [1,2,3]
@@ -66,6 +66,7 @@ dogs_per_leg(Legs) ->
 -record(time, {hour :: 0..23, minute :: 0..59}).
 
 t1() -> #time{hour = 12, minute = 24}. % 12 Uhr 24
+t2() -> #time{hour = 12, minute = 0}. % 12 Uhr 00
 
 % int x = 10;
 
@@ -73,5 +74,5 @@ t1() -> #time{hour = 12, minute = 24}. % 12 Uhr 24
 -spec minutes_since_midnight(#time{}) -> number().
 minutes_since_midnight(Time) ->
     Minutes1 = Time#time.hour * 60,
-    Minutes1 = Minutes1 + Time#time.minute,
+    Minutes1 = (Minutes1 + Time#time.minute),
     Minutes1.
