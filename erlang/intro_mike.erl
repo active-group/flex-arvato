@@ -187,4 +187,4 @@ rev([First|Rest]) ->
 % Result ist die umgedrehte Liste aller schon gesehenen Elemente
 rev([], Result) -> Result;
 rev([First|Rest], Result) ->
-    rev(Rest, )
+    rev(Rest, [First|Result]).
