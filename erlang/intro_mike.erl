@@ -129,6 +129,9 @@ run_over_animal(#parrot{weight = Weight}) ->
 highway() -> [d1(), d2(), p1(), p2()].
 
 % Eine Liste ist eins der folgenden:
-% - die leere Liste
+% - die leere Liste ODER
 % - eine Cons-Liste, bestehend aus dem ersten Element 
 %   und der Rest-Liste
+
+% Alle Elemente einer Liste aufsummieren
+-spec list_sum()
