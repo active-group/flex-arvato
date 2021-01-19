@@ -197,5 +197,7 @@ format_process() ->
     spawn (fun () ->
         receive
             Message -> io:format(Message)
+            after 10000 -> % ms
+                io:format("timeout~n")
         end % zum receive
         end). % zum fun
