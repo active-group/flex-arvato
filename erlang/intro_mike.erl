@@ -116,7 +116,7 @@ p2() -> #parrot{sentence = "Idiot!", weight = 0.5}.
 run_over_dillo(#dillo{weight = Weight}) ->
     #dillo{liveness = dead, weight = Weight}.
 
--spec animal_weight(animal()) -> number.
+-spec animal_weight(animal()) -> number().
 animal_weight(#dillo{weight = Weight}) -> Weight;
 animal_weight(#parrot{weight = Weight}) -> Weight.
 
