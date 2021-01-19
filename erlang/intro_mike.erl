@@ -220,4 +220,5 @@ inc_loop(N) ->
 
 inc_process() ->
     % spawn(fun () -> inc_loop(0) end).
-    spawn(intro_mike, inc_loop, [0]).
+    % spawn(intro_mike, inc_loop, [0]).
+    spawn(?MODULE, inc_loop).
