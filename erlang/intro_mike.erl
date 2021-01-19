@@ -1,7 +1,8 @@
 -module(intro_mike).
 -export([double/1, double/2, state/1, typical/1,
     safe_divide/2, dogs_per_leg/1, t1/0, t2/0, minutes_since_midnight/1,
-    d1/0, d2/0, run_over_dillo/1, p1/0, p2/0, run_over_animal/1]).
+    d1/0, d2/0, run_over_dillo/1, p1/0, p2/0, run_over_animal/1,
+    animal_weight/1]).
 
 % Atome: mike, stefan, error
 % Liste: [1,2,3]
@@ -106,6 +107,8 @@ p1() -> #parrot{sentence = "Hello!", weight = 1}.
 -spec p2() -> animal().
 p2() -> #parrot{sentence = "Idiot!", weight = 0.5}.
 
+% Gewicht hochziehen:
+% -record tanimal{ weight :: number(), kind :: ...}
 
 % Gürteltier überfahren
 % class Dillo { void runOver() { this.alive = false; } }
@@ -114,7 +117,7 @@ run_over_dillo(#dillo{weight = Weight}) ->
     #dillo{liveness = dead, weight = Weight}.
 
 -spec animal_weight(animal()) -> number.
-animal_weight(#dillo{weight = Weight}) -> Weight.
+animal_weight(#dillo{weight = Weight}) -> Weight;
 animal_weight(#parrot{weight = Weight}) -> Weight.
 
 -spec run_over_animal(animal()) -> animal().
