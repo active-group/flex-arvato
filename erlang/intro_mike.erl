@@ -207,6 +207,16 @@ format_process() ->
 
 format_process_loop() ->
     receive 
-        Message -> io:format(Message)
+        Message -> io:format(Message),
+                   format_process_loop()
+    end.
+
+inc_loop(N) ->
+    receive
+        Inc -> io:format("incrementing ~w by ~w~n", [N, Inc])
     end,
-    format_process_loop().
+    inc_loop(N + Inc).
+
+
+inc_process() ->
+    spawn(fun () -> inc_loop(0) end).
