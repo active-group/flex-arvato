@@ -4,7 +4,7 @@
     ist_niedlich/1, noon/0, minutes_since_midnight/1, t1/0, t2/0, t3/0,
     g1/0, g2/0, g3/0, g4/0, guerteltier_ueberfahren/1, guerteltier_fuettern/2,
     p1/0, p2/0, tier_ueberfahren/1,
-    list_sum/1, list_mult/1, guerteltier_gewichte/1, glist/0,
+    list_sum/1, list_mult/1, guerteltier_gewichte/1, glist/0, list_map/2,
     format_process/0, format_process_loop/0, run_process/0
 ]).
 
@@ -119,14 +119,15 @@ list_mult([First|Rest]) ->
     First
     * list_mult(Rest).
 
-% -spec guerteltier_gewichte(list(#guerteltier{}) -> list(number()).
-% guerteltier_gewichte([]) -> [];
-% guerteltier_gewichte([#guerteltier{gewicht = Gewicht}|Rest]) ->
-%     [Gewicht | guerteltier_gewichte(Rest)].
+-spec guerteltier_gewichte(list(#guerteltier{})) -> list(number()).
+guerteltier_gewichte([]) -> [];
+guerteltier_gewichte([#guerteltier{gewicht = Gewicht}|Rest]) ->
+    [Gewicht | guerteltier_gewichte(Rest)].
 
-% -spec list_map(func((A) -> B)), list(A)) -> list(B).
-% list_map(_F, []) -> [];
-% list_map(F, [First|Rest]) ->
+-spec list_map(fun((A) -> B), list(A)) -> list(B).
+list_map(_F, []) -> [];
+list_map(F, [First|Rest]) ->
+    [ F(First) | list_map(F, Rest) ].
 
 % Prozesse
 % spawn() startet einen neuen Prozess
@@ -138,17 +139,17 @@ format_process() ->
         receive
             Message -> io:format(Message)
             after 10000 -> % ms
-                io:formt("timeout~n")
+                io:format("timeout~n")
         end
     end).
 
 format_process_loop() ->
         receive
-            Message -> io:format(Message)
+            Message -> io:format(Message),
+                       format_process_loop()
             after 10000 -> % ms
-                io:formt("timeout~n")
-        end,
-        format_process_loop().
+                io:format("timeout~n")
+        end.
 
 run_process() ->
     spawn(fun format_process_loop/0).
