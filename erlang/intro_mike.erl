@@ -3,7 +3,8 @@
     safe_divide/2, dogs_per_leg/1, t1/0, t2/0, minutes_since_midnight/1,
     d1/0, d2/0, run_over_dillo/1, p1/0, p2/0, run_over_animal/1,
     animal_weight/1, list_sum/1, list_product/1,
-    animal_weights/1, run_over_animals/1, highway/0, list_map/2]).
+    animal_weights/1, run_over_animals/1, highway/0, list_map/2,
+    rev/1]).
 
 % Atome: mike, stefan, error
 % Liste: [1,2,3]
