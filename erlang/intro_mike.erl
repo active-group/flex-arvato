@@ -1,5 +1,5 @@
 -module(intro_mike).
--export([double/1, double/2]).
+-export([double/1, double/2, state/1]).
 
 % Atome: mike, stefan, error
 % Liste: [1,2,3]
@@ -17,4 +17,8 @@ double(X, Y) -> X * Y * 2.
 
 % Aggregatzustand von Wasser
 state(Temp) ->
-    
+    if
+        Temp < 0 -> fest;
+        Temp < 100 -> fluessig;
+        Temp >= 100 -> gas
+    end.
