@@ -1,5 +1,6 @@
 -module(intro_mike).
--export([double/1, double/2, state/1, typical/1]).
+-export([double/1, double/2, state/1, typical/1,
+    safe_divide/2]).
 
 % Atome: mike, stefan, error
 % Liste: [1,2,3]
@@ -39,4 +40,13 @@ typical(gas) -> 300.
 %    end.
 
 safe_divide(X, Y) ->
-    
+    if
+        Y == 0 -> divide_by_zero;
+        true -> {ok, X / Y}
+    end.
+
+dogs_per_leg(Legs) ->
+    case safe_divide(Legs, 4) of
+        {ok, Dogs} -> Dogs;
+        divide_by_zero -> io:format("this can't happen)
+    end.
