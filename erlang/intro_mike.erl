@@ -46,10 +46,12 @@ safe_divide(X, Y) ->
         true -> {ok, X / Y}
     end.
 
-
 dogs_per_leg(Legs) ->
     case safe_divide(Legs, 4) of
         % Pattern: 2-Tupel, erstes Element: Atom ok, zweites Element
         {ok, Dogs} -> Dogs;
         {error, divide_by_zero} -> io:format("this can't happen")
     end.
+
+% 3 Sorten Haustiere: Hunde, Katzen, Schlange
+% Schreibe eine Funktion, die herausbekommt, ob ein Haustier niedlich ist!
