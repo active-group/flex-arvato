@@ -23,3 +23,12 @@ state(Temp) ->
         Temp < 100 -> fluessig;
         true -> gas
     end.
+
+% Typische Temperatur zum Aggregatzustand
+-spec typical(fest | fluessig | gas) -> number().
+typical(State) ->
+    if
+        State == fest -> -20;
+        State == fluessig -> 18;
+        true -> 300
+    end.
