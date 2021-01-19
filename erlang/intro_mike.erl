@@ -1,7 +1,7 @@
 -module(intro_mike).
 -export([double/1, double/2, state/1, typical/1,
     safe_divide/2, dogs_per_leg/1, t1/0, t2/0, minutes_since_midnight/1,
-    d1/0, d2/0, run_over_dillo/1]).
+    d1/0, d2/0, run_over_dillo/1, p1/0, p2/0, run_over_animal/1]).
 
 % Atome: mike, stefan, error
 % Liste: [1,2,3]
