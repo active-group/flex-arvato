@@ -83,6 +83,7 @@ minutes_since_midnight(Time) ->
 % Ein Tier ist eins der folgenden:
 % - ein Gürteltier ODER
 % - ein Papagei
+-type animal() :: #dillo{} | #parrot{}.
 
 % Ein Gürteltier hat folgende Eigenschaften:
 % - tot oder lebendig
@@ -104,7 +105,6 @@ p1() -> #parrot{sentence = "Hello!", weight = 1}.
 -spec p2() -> animal().
 p2() -> #parrot{sentence = "Idiot!", weight = 0.5}.
 
--type animal() :: #dillo{} | #parrot{}.
 
 % Gürteltier überfahren
 % class Dillo { void runOver() { this.alive = false; } }
