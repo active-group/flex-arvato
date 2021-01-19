@@ -176,5 +176,4 @@ list_map(F, [First|Rest]) ->
 -spec rev(list(A)) -> list(A).
 rev([]) -> [];
 rev([First|Rest]) ->
-    First
-    rev(Rest)
+    rev(Rest) ++ First.
