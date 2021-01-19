@@ -125,3 +125,6 @@ run_over_animal(#dillo{weight = Weight}) ->
     #dillo{liveness = dead, weight = Weight};
 run_over_animal(#parrot{weight = Weight}) ->
     #parrot{sentence = "", weight = Weight}.
+
+highway() -> [d1(), d2(), p1(), p2()].
+
