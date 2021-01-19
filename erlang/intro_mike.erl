@@ -193,11 +193,20 @@ rev([First|Rest], Result) ->
 % spawn startet einen Prozeß - LEICHGEWICHTIG
 % Pendant zu "Thread" in Java                       
 
+% format_process() ->
+%     spawn (fun () ->
+%         receive
+%             Message -> io:format(Message)
+%             after 10000 -> % ms
+%                 io:format("timeout~n")
+%         end % zum receive
+%         end). % zum fun
+
 format_process() ->
-    spawn (fun () ->
-        receive
-            Message -> io:format(Message)
-            after 10000 -> % ms
-                io:format("timeout~n")
-        end % zum receive
-        end). % zum fun
+    spawn(fun format_process_loop/0).
+
+format_process_loop() ->
+    receive 
+        Message -> io:format(Message)
+    end,
+    format_process_loop().
