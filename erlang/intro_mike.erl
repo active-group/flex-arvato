@@ -215,7 +215,7 @@ inc_loop(N) ->
     receive
         Inc -> io:format("incrementing ~w by ~w~n", [N, Inc])
     end,
-    inc_loop(N + Inc).
+    inc_loop(N + Incf).
 
 
 inc_process() ->
