@@ -132,7 +132,12 @@ highway() -> [d1(), d2(), p1(), p2()].
 % - die leere Liste ODER
 % - eine Cons-Liste, bestehend aus dem ersten Element 
 %   und der Rest-Liste
+%                ^^^^^ Selbstreferenz
 
 % Alle Elemente einer Liste aufsummieren
 -spec list_sum(list(number())) -> number().
-
+list_sum([]) -> 0;
+list_sum([First|Rest]) ->
+    First % das erste Element
+    + list_sum(Rest). % die Summe der restlichen Summe
+ 
