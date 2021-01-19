@@ -134,6 +134,12 @@ highway() -> [d1(), d2(), p1(), p2()].
 %   und der Rest-Liste
 %                ^^^^^ Selbstreferenz
 
+% x + n = n + x = x
+% n: neutrales Element der Addition
+
+% x * n = n * x = x
+% n: neutrale Element der Multiplikation
+
 % Alle Elemente einer Liste aufsummieren
 -spec list_sum(list(number())) -> number().
 list_sum([]) -> 0;
@@ -141,3 +147,9 @@ list_sum([First|Rest]) ->
     First % das erste Element
     + list_sum(Rest). % die Summe der restlichen Summe
  
+ % Alle Elemente einer Liste aufmultiplizieren
+-spec list_product(list(number())) -> number().
+list_product([]) -> 1;
+list_product([First|Rest]) ->
+    First % das erste Element
+    * list_product(Rest). % das Produkt der restlichen Summe
