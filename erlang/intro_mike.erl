@@ -74,4 +74,5 @@ t2() -> #time{hour = 12, minute = 0}. % 12 Uhr 00
 -spec minutes_since_midnight(#time{}) -> number().
 minutes_since_midnight(Time) ->
     Minutes1 = Time#time.hour * 60,
-    Minutes1 + Time#time.minute).
+    Minutes1 = (Minutes1 + Time#time.minute),
+    Minutes1.
