@@ -4,4 +4,4 @@
 % Liste: [1,2,3]
 % Tupel: {1, "mike", false, foo}
 % Zeichenkette: "mike"
-% Binary: 
+% Binary: <<"Mike">>
