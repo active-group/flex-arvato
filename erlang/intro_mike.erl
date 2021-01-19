@@ -214,9 +214,8 @@ format_process_loop() ->
 inc_loop(N) ->
     receive
         Inc -> io:format("incrementing ~w by ~w~n", [N, Inc]),
-               inc_loop(N + Inc).
-    end,
-
+               inc_loop(N + Inc)
+    end.
 
 inc_process() ->
     % spawn(fun () -> inc_loop(0) end).
