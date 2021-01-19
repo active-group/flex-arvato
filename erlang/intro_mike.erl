@@ -27,7 +27,8 @@ state(Temp) ->
 % Typische Temperatur zum Aggregatzustand
 -spec typical(fest | fluessig | gas) -> number().
 typical(fest) -> -20;
-
+typical(fluessig) -> 18;
+typical(gas) -> 300.
 
 % typical(State) ->
 %    if
