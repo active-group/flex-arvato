@@ -197,4 +197,5 @@ format_process() ->
     spawn (fun () ->
         receive
             Message -> io:format(Message)
-        end).
+        end
+        end).   
