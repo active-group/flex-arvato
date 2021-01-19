@@ -1,5 +1,5 @@
 -module(intro_mike).
--export([double/1, double/2, state/1]).
+-export([double/1, double/2, state/1, typical/1]).
 
 % Atome: mike, stefan, error
 % Liste: [1,2,3]
