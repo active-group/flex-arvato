@@ -171,4 +171,10 @@ list_map(_F, []) -> [];
 list_map(F, [First|Rest]) ->
     [ F(First) | list_map(F, Rest) ].
 
+% rev([1,2,3]) ... rev([2,3])
+
 -spec rev(list(A)) -> list(A).
+rev([]) -> [];
+rev([First|Rest]) ->
+    First
+    rev(Rest)
