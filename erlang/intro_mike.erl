@@ -19,7 +19,7 @@ double(X, Y) -> X * Y * 2.
 -spec state(number()) -> fest | fluessig | gas.
 state(Temp) ->
     if
-        Temp < 0 -> fest;
+        Temp == 0 -> fest;
         Temp < 100 -> fluessig;
         true -> gas
     end.
