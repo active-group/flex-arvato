@@ -9,6 +9,7 @@
 
 % Variablen: fangen mit Großbuchstaben an
 % Kleinbuchstaben: Atom
+-
 double(X) -> X * 2.
 
 double(X, Y) -> X * Y * 2.
