@@ -183,7 +183,7 @@ rev([First|Rest]) ->
 % N + (N-1) + ... + 1
 % N*(N-1)/2 = O(N^2)
 
--spec rev(list(A), list(A)) -> list(A)
+-spec rev(list(A), list(A)) -> list(A).
 % Result ist die umgedrehte Liste aller schon gesehenen Elemente
 rev([], Result) -> Result;
 rev([First|Rest], Result) ->
