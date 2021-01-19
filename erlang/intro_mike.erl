@@ -153,3 +153,8 @@ list_product([]) -> 1;
 list_product([First|Rest]) ->
     First % das erste Element
     * list_product(Rest). % das Produkt der restlichen Summe
+
+-spec animal_weights(list(animal())) -> list(number()).
+animal_weights([]) -> [];
+animal_weights([First|Rest]) ->
+    [ animal_weight(First) | animal_weights(Rest) ].
