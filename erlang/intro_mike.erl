@@ -9,7 +9,7 @@
 
 % Variablen: fangen mit Großbuchstaben an
 % Kleinbuchstaben: Atom
--
+-spec double(number()) -> number().
 double(X) -> X * 2.
 
 double(X, Y) -> X * Y * 2.
