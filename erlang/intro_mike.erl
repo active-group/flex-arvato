@@ -83,7 +83,7 @@ minutes_since_midnight(Time) ->
 -record(dillo, {liveness :: dead | alive, weight :: number()}).
 
 % Lebendiges Gürteltier, 10kg
-d1() -> #dillo{alive, 10}.
+d1() -> #dillo{liveness = alive, weight = 10}.
 % Totes Gürteltier, 12kg
 d2() -> #dillo{liveness = dead, weight =12}.
 
