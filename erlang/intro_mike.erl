@@ -80,4 +80,3 @@ minutes_since_midnight(Time) ->
 % Ein Gürteltier hat folgende Eigenschaften:
 % - tot oder lebendig
 % - Gewicht
--record()
