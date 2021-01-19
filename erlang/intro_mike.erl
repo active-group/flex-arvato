@@ -39,14 +39,16 @@ typical(gas) -> 300.
 %        true -> 300
 %    end.
 
+-spec safe_divide(number(), number()) -> {error, divide_by_zero} | {ok, number()}.
 safe_divide(X, Y) ->
     if
-        Y == 0 -> divide_by_zero;
+        Y == 0 -> {error, divide_by_zero};
         true -> {ok, X / Y}
     end.
 
 dogs_per_leg(Legs) ->
     case safe_divide(Legs, 4) of
+        % Pattern: 2-Tupel, erstes Element: Atom ok, zweites Element
         {ok, Dogs} -> Dogs;
-        divide_by_zero -> io:format("this can't happen")
+        {error, divide_by_zero} -> io:format("this can't happen")
     end.
