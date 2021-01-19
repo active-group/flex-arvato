@@ -80,16 +80,28 @@ minutes_since_midnight(Time) ->
 
 % Zustand eines Gürteltiers zu einem bestimmten Zeitpunkt
 
+% Ein Tier ist eins der folgenden:
+% - ein Gürteltier ODER
+% - ein Papagei
+
 % Ein Gürteltier hat folgende Eigenschaften:
 % - tot oder lebendig
 % - Gewicht
 -record(dillo, {liveness :: dead | alive, weight :: number()}).
+
+% Ein Papagei hat folgende Eigenschaften:
+% - Satz
+% - Gewicht
+-record(parrot, {sentence :: string(), weight :: number()}).
 
 % Lebendiges Gürteltier, 10kg
 d1() -> #dillo{liveness = alive, weight = 10}.
 
 % Totes Gürteltier, 12kg
 d2() -> #dillo{liveness = dead, weight =12}.
+
+p1() -> #parrot{sentence = "Hello!", weight = 1}.
+p2() -> #parrot{sentence = "Idiot!", weight = 0.5}.
 
 % Gürteltier überfahren
 % class Dillo { void runOver() { this.alive = false; } }
