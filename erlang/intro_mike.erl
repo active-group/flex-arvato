@@ -166,6 +166,6 @@ run_over_animals([First|Rest]) ->
     [run_over_animal(First) | run_over_animals(Rest) ].
 
 % Abstraktion über animal_weights und run_over_animals
-list_map(_, []) -> [];
+list_map(_F, []) -> [];
 list_map(F, [First|Rest]) ->
     [F(First) | list_map(F, Rest) ].
