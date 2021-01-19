@@ -177,4 +177,4 @@ list_map(F, [First|Rest]) ->
 -spec rev(list(A)) -> list(A).
 rev([]) -> [];
 rev([First|Rest]) ->
-    rev(Rest) ++ [First].
+    rev(Rest) ++ [First]. % ++ linear in Länge Rest
