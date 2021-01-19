@@ -178,3 +178,10 @@ list_map(F, [First|Rest]) ->
 rev([]) -> [];
 rev([First|Rest]) ->
     rev(Rest) ++ [First]. % ++ linear in Länge Rest
+
+% 100 + 99 + 98 + 97 + 96 + ... + 5 + 4 + 3 + 2 + 1
+% N + (N-1) + ... + 1
+% N*(N-1)/2 = O(N^2)
+
+-spec rev(list(A), list(A)) -> list(A)
+rev([], Result) -> Result
