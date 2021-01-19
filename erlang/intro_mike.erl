@@ -16,9 +16,10 @@ double(X) -> X * 2.
 double(X, Y) -> X * Y * 2.
 
 % Aggregatzustand von Wasser
+-spec state(number()) -> fest | fluessig | gas.
 state(Temp) ->
     if
         Temp < 0 -> fest;
         Temp < 100 -> fluessig;
-        Temp >= 100 -> gas
+        true -> gas
     end.
