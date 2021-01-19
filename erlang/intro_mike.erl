@@ -190,4 +190,5 @@ rev([First|Rest], Result) ->
      rev(Rest, [First|Result]). % rekursiver Aufruf ohne Kontext, tail call
                                 % verbraucht keinen Platz auf dem "Stack"
 
-% spawn startet einen Prozeß                           
+% spawn startet einen Prozeß - LEICHGEWICHTIG
+% Pendant zu "Thread" in Java                       
