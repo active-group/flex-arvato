@@ -5,3 +5,4 @@
 % Tupel: {1, "mike", false, foo}
 % Zeichenkette: "mike"
 % Binary: <<"Mike">>
+
