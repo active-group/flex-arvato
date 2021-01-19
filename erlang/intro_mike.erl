@@ -103,6 +103,7 @@ d2() -> #dillo{liveness = dead, weight =12}.
 p1() -> #parrot{sentence = "Hello!", weight = 1}.
 p2() -> #parrot{sentence = "Idiot!", weight = 0.5}.
 
+
 % Gürteltier überfahren
 % class Dillo { void runOver() { this.alive = false; } }
 -spec run_over_dillo(#dillo{}) -> #dillo{}.
