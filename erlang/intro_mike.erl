@@ -134,4 +134,5 @@ highway() -> [d1(), d2(), p1(), p2()].
 %   und der Rest-Liste
 
 % Alle Elemente einer Liste aufsummieren
--spec list_sum()
+-spec list_sum(list(number())) -> number().
+
