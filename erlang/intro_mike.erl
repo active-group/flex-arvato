@@ -158,3 +158,12 @@ list_product([First|Rest]) ->
 animal_weights([]) -> [];
 animal_weights([First|Rest]) ->
     [ animal_weight(First) | animal_weights(Rest) ].
+
+-spec run_over_animals(list(animal())) -> list(animal()).
+run_over_animals([]) -> [];
+run_over_animals([First|Rest]) ->
+    [run_over_animal(First) | run_over_animals(Rest) ].
+
+list_map(_F, []) -> [];
+list_map(F, [First|Rest]) ->
+    [F(First) | list_map(Rest) ].
