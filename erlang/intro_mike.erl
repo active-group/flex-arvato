@@ -130,4 +130,5 @@ highway() -> [d1(), d2(), p1(), p2()].
 
 % Eine Liste ist eins der folgenden:
 % - die leere Liste
-% - 
+% - eine Cons-Liste, bestehend aus dem ersten Element 
+%   und der Rest-Liste
