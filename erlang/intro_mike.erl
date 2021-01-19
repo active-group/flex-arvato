@@ -1,6 +1,6 @@
 -module(intro_mike).
 -export([double/1, double/2, state/1, typical/1,
-    safe_divide/2]).
+    safe_divide/2, dogs_per_leg/1]).
 
 % Atome: mike, stefan, error
 % Liste: [1,2,3]
@@ -45,6 +45,7 @@ safe_divide(X, Y) ->
         Y == 0 -> {error, divide_by_zero};
         true -> {ok, X / Y}
     end.
+
 
 dogs_per_leg(Legs) ->
     case safe_divide(Legs, 4) of
