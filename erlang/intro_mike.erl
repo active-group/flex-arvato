@@ -84,6 +84,7 @@ minutes_since_midnight(Time) ->
 
 % Lebendiges Gürteltier, 10kg
 d1() -> #dillo{liveness = alive, weight = 10}.
+
 % Totes Gürteltier, 12kg
 d2() -> #dillo{liveness = dead, weight =12}.
 
