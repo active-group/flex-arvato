@@ -187,4 +187,6 @@ rev([First|Rest]) ->
 % Result ist die umgedrehte Liste aller schon gesehenen Elemente
 rev([], Result) -> Result;
 rev([First|Rest], Result) ->
-    rev(Rest, [First|Result]).
+     rev(Rest, [First|Result]). % rekursiver Aufruf ohne Kontext, tail call
+                                % verbraucht keinen Platz auf dem "Stack"
+                                
