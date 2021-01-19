@@ -37,3 +37,6 @@ typical(gas) -> 300.
 %        State == fluessig -> 18;
 %        true -> 300
 %    end.
+
+safe_divide(X, Y) ->
+    
