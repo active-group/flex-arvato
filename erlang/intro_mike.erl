@@ -150,7 +150,7 @@ list_sum([First|Rest]) ->
     + list_sum(Rest). % die Summe der restlichen Summe
  
  % Alle Elemente einer Liste aufmultiplizieren
--spec list_product(list(number())) -> list(number()).
+-spec list_product(list(number())) -> number().
 list_product([]) -> 1;
 list_product([First|Rest]) ->
     First % das erste Element
