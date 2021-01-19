@@ -93,6 +93,7 @@ minutes_since_midnight(Time) ->
 % Ein Tier ist eins der folgenden:
 % - ein Gürteltier ODER
 % - ein Papagei
+% Fallunterscheidung, gemischte Daten
 -type animal() :: #dillo{} | #parrot{}.
 
 % Lebendiges Gürteltier, 10kg
