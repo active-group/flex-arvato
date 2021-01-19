@@ -78,6 +78,8 @@ minutes_since_midnight(Time) ->
     Minutes2 = (Minutes1 + Time#time.minute),
     Minutes2.
 
+% Zustand eines Gürteltiers zu einem bestimmten Zeitpunkt
+
 % Ein Gürteltier hat folgende Eigenschaften:
 % - tot oder lebendig
 % - Gewicht
@@ -90,3 +92,5 @@ d1() -> #dillo{liveness = alive, weight = 10}.
 d2() -> #dillo{liveness = dead, weight =12}.
 
 % Gürteltier überfahren
+% class Dillo { void runOver() { this.alive = false; } }
+-spec run_over_dillo(#dillo{}) -> #dillo{}.
