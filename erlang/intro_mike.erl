@@ -170,3 +170,5 @@ run_over_animals([First|Rest]) ->
 list_map(_F, []) -> [];
 list_map(F, [First|Rest]) ->
     [ F(First) | list_map(F, Rest) ].
+
+-spec rev(list(A)) -> list(A).
