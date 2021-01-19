@@ -192,3 +192,9 @@ rev([First|Rest], Result) ->
 
 % spawn startet einen Prozeß - LEICHGEWICHTIG
 % Pendant zu "Thread" in Java                       
+
+format_process() ->
+    spawn (fun () ->
+        receive
+            Message -> io:format(Message)
+        end).
