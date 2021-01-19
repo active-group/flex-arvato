@@ -1,6 +1,7 @@
 -module(intro_mike).
 -export([double/1, double/2, state/1, typical/1,
-    safe_divide/2, dogs_per_leg/1, t1/0, t2/0, minutes_since_midnight/1]).
+    safe_divide/2, dogs_per_leg/1, t1/0, t2/0, minutes_since_midnight/1,
+    d1/0, d2/0]).
 
 % Atome: mike, stefan, error
 % Liste: [1,2,3]
@@ -88,3 +89,4 @@ d1() -> #dillo{liveness = alive, weight = 10}.
 % Totes Gürteltier, 12kg
 d2() -> #dillo{liveness = dead, weight =12}.
 
+% Gürteltier überfahren
