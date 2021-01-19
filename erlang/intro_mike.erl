@@ -101,7 +101,7 @@ d1() -> #dillo{liveness = alive, weight = 10}.
 d2() -> #dillo{liveness = dead, weight =12}.
 
 p1() -> #parrot{sentence = "Hello!", weight = 1}.
--spec p2() -> ani().
+-spec p2() -> animal().
 p2() -> #parrot{sentence = "Idiot!", weight = 0.5}.
 
 -type animal() :: #dillo{} | #parrot{}.
