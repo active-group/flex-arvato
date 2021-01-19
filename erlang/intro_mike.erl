@@ -72,10 +72,10 @@ t2() -> #time{hour = 12, minute = 0}. % 12 Uhr 00
 
 % Minuten seit Mitternacht
 -spec minutes_since_midnight(#time{}) -> number().
-minutes_since_midnight(Time) ->
-    Minutes1 = Time#time.hour * 60,
-    Minutes2 = (Minutes1 + Time#time.minute),
-    Minutes2.
+% minutes_since_midnight(Time) ->
+%     Minutes1 = Time#time.hour * 60,
+%     Minutes2 = (Minutes1 + Time#time.minute),
+%     Minutes2.
 
 % Ein Gürteltier hat folgende Eigenschaften:
 % - tot oder lebendig
