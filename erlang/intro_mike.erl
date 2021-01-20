@@ -272,8 +272,8 @@ calc_supervisor() ->
     % {'EXIT', Pid, Exception}
     register(calc_service, Pid),
     receive
-        {'EXIT', _FromPid, _Reason} -> calc_supervisor();
-        _Msg -> calc_supervisor() % Mmmhh ...
+        {'EXIT', _FromPid, _Reason} -> calc_supervisor()
+        % _Msg -> calc_supervisor() % Mmmhh ...
     end.
 
 calc_process() -> 
