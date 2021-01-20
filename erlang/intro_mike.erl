@@ -6,7 +6,8 @@
     animal_weights/1, run_over_animals/1, highway/0, list_map/2,
     rev/1, rev/2, format_process/0, inc_process/0, inc_loop/1,
     calc_process/0, calc_loop/1, 
-    calc_inc/2, calc_reset/1, calc_mult/2, calc_get/1, calc_div/2]).
+    calc_inc/2, calc_reset/1, calc_mult/2, calc_get/1, calc_div/2,
+    calc_supervisor/0]).
 
 % Atome: mike, stefan, error
 % Liste: [1,2,3]
