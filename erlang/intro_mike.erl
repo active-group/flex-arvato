@@ -238,6 +238,11 @@ inc_process() ->
 -record(divide, {divisor :: number()}).
 -record(get, {pid :: pid()}).
 
+% Wiederkehrende Elemente:
+% - Schleife, die Nachrichten empfängt, verarbeitet, Zustand mitführt
+% - das in einem neuen Prozeß
+% - ... ggf. mit einem lokalen oder globalen Namen
+
 calc_loop(N) ->
     receive
         #reset{} -> calc_loop(0);
