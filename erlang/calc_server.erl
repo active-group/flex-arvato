@@ -9,7 +9,7 @@
          start/0]).
 
 start() ->
-    gen_server:start(?MODULE, unimportant, []).
+    gen_server:start(?MODULE, 0, []).
                            %  ^^^^^^^^^^^^ wird zum  Argument von init
 
 
@@ -34,7 +34,7 @@ update_calc_state(N, #divide{divisor = Divisor}) ->
 % #get{} ist anders als die anderen
 update_calc_state(N, #get{}) -> N.
 
-init(InitialN) -> {ok, Initia}.
+init(InitialN) -> {ok, InitialN}.
 
 % Module:handle_cast(Request, State) -> Result
 % Types
