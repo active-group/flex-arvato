@@ -29,4 +29,10 @@ update_calc_state(N, #get{}) -> N.
 
 init(_) -> {ok, 0}.
 
-handle_cast
+% Module:handle_cast(Request, State) -> Result
+% Types
+% Request = term()
+% State = term()
+% Result = {noreply,NewState} | 
+
+handle_cast(#reset{}, )
