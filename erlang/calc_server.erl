@@ -1,6 +1,7 @@
 -module(calc_server).
 
 -behaviour(gen_server).
+-export([init/1]).
 
 % Schnittstelle für Callbacks
 % Hier eine Implementierung des Interface gen_server
@@ -27,3 +28,5 @@ update_calc_state(N, #divide{divisor = Divisor}) ->
 update_calc_state(N, #get{}) -> N.
 
 init(_) -> {ok, 0}.
+
+handle_cast
