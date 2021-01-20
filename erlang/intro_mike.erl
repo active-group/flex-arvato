@@ -272,7 +272,7 @@ calc_supervisor() ->
     % wenn ein gelinkter Prozess stirbt, bekomme ich eine Nachricht
     % {'EXIT', Pid, Exception}
     register(calc_service, Pid),
-    global:register()
+    global:register_name(calc_service, Pid),
     receive
         {'EXIT', _FromPid, _Reason} -> calc_supervisor()
         % _Msg -> calc_supervisor() % Mmmhh ...
