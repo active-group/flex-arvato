@@ -262,10 +262,13 @@ calc_get(CalcPid) ->
     CalcPid ! #get{pid = self()},
     receive N -> N end.
 
+% "Supervisor"
 calc_process() ->
     Pid = spawn(?MODULE, calc_loop, [0]),
     % wenn Pid stirbt, sterbe auch ich (und umgekehrt)
     link(Pid),
+    % wenn ein gelinkter Prozess stirbt, bekomme ich eine Nachricht
+    % {'EXIT', Pid, Exception}
     process_flag(trap_exit, true),
     register(calc_service, Pid),
     Pid.
