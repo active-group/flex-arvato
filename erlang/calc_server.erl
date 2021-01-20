@@ -11,4 +11,6 @@
 -record(divide, {divisor :: number()}).
 -record(get, {pid :: pid()}).
 
--type message
+-type message() :: #reset{} | #inc{} 
+                 | #mult{} | #divide{} | #get{}.
+
