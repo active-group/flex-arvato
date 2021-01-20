@@ -48,5 +48,5 @@ handle_cast(Message, N) -> {noreply, update_calc_state(N, Message)}.
 % State = term()
 % Result = {reply,Reply,NewState}
 
-handle_call(#get{}, From, N) -> {reply, N, N}.
+handle_call(#get{}, _From, N) -> {reply, N, N}.
 
