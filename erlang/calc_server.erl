@@ -14,3 +14,7 @@
 -type message() :: #reset{} | #inc{} 
                  | #mult{} | #divide{} | #get{}.
 
+-spec update_calc_state(number(), message()) -> number().
+update_calc_state(_N, #reset{}) -> 0;
+update_calc_state(N, inc{increment = Increment}) ->
+    N + Increment;
