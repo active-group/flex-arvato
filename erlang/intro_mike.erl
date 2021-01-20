@@ -254,6 +254,9 @@ calc_reset(CalcPid) -> CalcPid ! #reset{}.
 calc_mult(CalcPid, Factor) ->
     CalcPid ! #mult{factor = Factor}.
 
+calc_div(CalcPid, Divisor) ->
+    CalcPid ! #divide{divisor =}
+
 calc_get(CalcPid) ->
     CalcPid ! #get{pid = self()},
     receive N -> N end.
