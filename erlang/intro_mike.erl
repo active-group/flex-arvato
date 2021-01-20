@@ -233,6 +233,7 @@ inc_process() ->
 -record(reset, {}).
 -record(inc, {increment :: number()}).
 -record(mult, {factor :: number()}).
+-record(div, {divisor :: number()}).
 -record(get, {pid :: pid()}).
 
 calc_loop(N) ->
