@@ -271,4 +271,8 @@ calc_process() ->
     % {'EXIT', Pid, Exception}
     process_flag(trap_exit, true),
     register(calc_service, Pid),
+    receive
+        {'EXIT', FromPid, Reason} -> ...;
+        _Msg -> ...
+    end,
     Pid.
