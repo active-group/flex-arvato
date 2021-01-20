@@ -11,3 +11,4 @@
 -record(divide, {divisor :: number()}).
 -record(get, {pid :: pid()}).
 
+-type message
