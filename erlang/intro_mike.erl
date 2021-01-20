@@ -272,6 +272,6 @@ calc_process() ->
     process_flag(trap_exit, true),
     register(calc_service, Pid),
     receive
-        {'EXIT', FromPid, Reason} -> calc_process();
+        {'EXIT', _FromPid, _Reason} -> calc_process();
         _Msg -> calc_process() % Mmmhh ...
     end.
