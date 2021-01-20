@@ -6,7 +6,7 @@
 % Hier eine Implementierung des Interface gen_server
 % Schnittstelle für Callbacks
 -export([init/1, handle_cast/2, handle_call/3,
-         start/0, calc_reset/1]).
+         start/0, calc_reset/1, calc_inc/2, calc_mult/2, calc_div/2, calc_get/1]).
 
 start() ->
     gen_server:start(?MODULE, 0, []).
