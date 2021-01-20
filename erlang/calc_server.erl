@@ -37,5 +37,7 @@ init(_) -> {ok, 0}.
 
 handle_cast(Message, N) -> {noreply, update_calc_state(N, Message)}.
 
-
+% Ein Request, der keine Antwort erfordert: cast
+% Ein Request, der eine Antwort erfordert: call
+handle_call
 
