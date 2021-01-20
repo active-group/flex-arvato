@@ -255,7 +255,7 @@ calc_mult(CalcPid, Factor) ->
     CalcPid ! #mult{factor = Factor}.
 
 calc_div(CalcPid, Divisor) ->
-    CalcPid ! #divide{divisor =}
+    CalcPid ! #divide{divisor = Divisor}.
 
 calc_get(CalcPid) ->
     CalcPid ! #get{pid = self()},
