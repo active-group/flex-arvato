@@ -39,5 +39,14 @@ handle_cast(Message, N) -> {noreply, update_calc_state(N, Message)}.
 
 % Ein Request, der keine Antwort erfordert: cast
 % Ein Request, der eine Antwort erfordert: call
-handle_call
+
+% Module:handle_call(Request, From, State) -> Result
+	
+% Types
+% Request = term()
+% From = {pid(),Tag}
+% State = term()
+% Result = {reply,Reply,NewState}
+
+handle_call(Reqest, From)
 
