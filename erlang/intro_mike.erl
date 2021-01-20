@@ -266,5 +266,6 @@ calc_process() ->
     Pid = spawn(?MODULE, calc_loop, [0]),
     % wenn Pid stirbt, sterbe auch ich (und umgekehrt)
     link(Pid),
+    process_flag(trap_exit),
     register(calc_service, Pid),
     Pid.
