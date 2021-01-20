@@ -241,6 +241,7 @@ calc_loop(N) ->
         #reset{} -> calc_loop(0);
         #inc{increment = Increment} -> calc_loop(N + Increment);
         #mult{factor = Factor} -> calc_loop(N * Factor);
+        #divide{divisor = Divisor} -> calc_loop(N / Divisor);
         #get{pid = Pid} -> Pid ! N,
                            calc_loop(N)
     end.
