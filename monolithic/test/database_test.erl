@@ -19,16 +19,16 @@ put_person(_) ->
     fun() ->
             Person = #person{id = 15, firstname = <<"Mike">>, surname = <<"Sperber">>},
             database:put_person(Person),
-            ?assertEqual(database:get_person(15), {ok, Person}),
-            ?assertEqual(database:get_all_persons(), [Person])
+            {ok, Person} = database:get_person(15),
+            [Person] = database:get_all_persons()
     end.
 
 put_account(_) ->
     fun() ->
             Account = #account{account_number = 42, person_id = 17, amount = 100 },
             database:put_account(Account),
-            ?assertEqual(database:get_account(42), {ok, Account}),
-            ?assertEqual(database:get_all_accounts(), [Account])
+            {ok, Account} = database:get_account(42),
+            [Account] = database:get_all_accounts()
     end.
 
 put_transaction(_) ->
