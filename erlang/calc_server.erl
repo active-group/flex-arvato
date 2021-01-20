@@ -22,4 +22,6 @@ update_calc_state(N, #mult{factor = Factor}) ->
     N * Factor;
 update_calc_state(N, #divide{divisor = Divisor}) ->
     N / Divisor;
+% muß auch noch Nachricht zurückschicken:
+% #get{} ist anders als die anderen
 update_calc_state(N, #get{}) -> N.
