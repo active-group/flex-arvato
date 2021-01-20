@@ -3,10 +3,11 @@
 -behaviour(gen_server).
 % gen_server ist Teil des OTP-Frameworks, das bei Erlang dabei ist
 % Open Telephone Platform
+% Hier eine Implementierung des Interface gen_server
+% Schnittstelle für Callbacks
 -export([init/1, handle_cast/2, handle_call/3]).
 
-% Schnittstelle für Callbacks
-% Hier eine Implementierung des Interface gen_server
+
 
 -record(reset, {}).
 -record(inc, {increment :: number()}).
@@ -39,8 +40,8 @@ init(_) -> {ok, 0}.
 
 handle_cast(Message, N) -> {noreply, update_calc_state(N, Message)}.
 
-% Ein Request, der keine Antwort erfordert: cast
-% Ein Request, der eine Antwort erfordert: call
+% Ein Request, der keine Antwort erfordert: cast (asynchron)
+% Ein Request, der eine Antwort erfordert: call (synchron)
 
 % Module:handle_call(Request, From, State) -> Result
 	
