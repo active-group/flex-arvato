@@ -1,7 +1,7 @@
 -module(calc_server).
 
 -behaviour(gen_server).
--export([init/1, handle_cast/2]).
+-export([init/1, handle_cast/2, handle_call/3]).
 
 % Schnittstelle für Callbacks
 % Hier eine Implementierung des Interface gen_server
@@ -48,5 +48,5 @@ handle_cast(Message, N) -> {noreply, update_calc_state(N, Message)}.
 % State = term()
 % Result = {reply,Reply,NewState}
 
-handle_call(Reqest, From)
+handle_call(Reqest, From, N) -> {reply, N, N}.
 
