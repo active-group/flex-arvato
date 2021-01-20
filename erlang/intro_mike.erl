@@ -264,5 +264,6 @@ calc_get(CalcPid) ->
 
 calc_process() ->
     Pid = spawn(?MODULE, calc_loop, [0]),
+    link(Pid),
     register(calc_service, Pid),
     Pid.
