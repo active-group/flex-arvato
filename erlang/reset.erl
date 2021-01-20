@@ -13,7 +13,8 @@ format_process_loop() ->
 
 inc_loop2(N) ->
     receive
-        reset -> inc_loop2(0);
+        reset -> io:format("resetting~n"),
+                 inc_loop2(0);
         Inc -> io:format("incrementing ~w by ~w~n", [N, Inc]),
                inc_loop2(N + Inc)
     end.
