@@ -11,7 +11,10 @@
 start() ->
     gen_server:start(?MODULE, 0, []).
                            %  ^^^^^^^^^^^^ wird zum  Argument von init
+% macht einen neuen Prozess, ruft dort init auf, startet Schleife, die
+% Nachrichten empfängt
 
+calc_reset(Pid) -> gen_server:cast(Pid, #reset{}).
 
 -record(reset, {}).
 -record(inc, {increment :: number()}).
