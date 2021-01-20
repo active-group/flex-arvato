@@ -7,7 +7,8 @@
 % Schnittstelle für Callbacks
 -export([init/1, handle_cast/2, handle_call/3]).
 
-gen_server:start(?MODULE, , [])
+start() ->
+    gen_server:start(?MODULE, unimportant, [])
 
 
 -record(reset, {}).
