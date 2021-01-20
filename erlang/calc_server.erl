@@ -26,4 +26,4 @@ update_calc_state(N, #divide{divisor = Divisor}) ->
 % #get{} ist anders als die anderen
 update_calc_state(N, #get{}) -> N.
 
-init
+init(_) -> {ok, 0}.
