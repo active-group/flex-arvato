@@ -19,13 +19,13 @@ start() ->
 -record(inc, {increment :: number()}).
 -record(mult, {factor :: number()}).
 -record(divide, {divisor :: number()}).
--record(get, {pid :: pid()}).
+-record(get, {}).
 
 calc_reset(Pid) -> gen_server:cast(Pid, #reset{}).
 calc_inc(Pid, Increment) -> gen_server:cast(Pid, #inc{increment = Increment}).
 calc_mult(Pid, Factor) -> gen_server:cast(Pid, #mult{factor = Factor}).
 calc_div(Pid, Divisor) -> gen_server:cast(Pid, #divide{divisor = Divisor}).
-calc_get(Pid) -> gen_server:call(Pid, #get{pid = self()}).
+calc_get(Pid) -> gen_server:call(Pid, #get{}).
 
 -type message() :: #reset{} | #inc{} 
                  | #mult{} | #divide{} | #get{}.
