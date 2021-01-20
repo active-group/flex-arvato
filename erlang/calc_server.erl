@@ -16,5 +16,10 @@
 
 -spec update_calc_state(number(), message()) -> number().
 update_calc_state(_N, #reset{}) -> 0;
-update_calc_state(N, inc{increment = Increment}) ->
+update_calc_state(N, #inc{increment = Increment}) ->
     N + Increment;
+update_calc_state(N, #mult{factor = Factor}) ->
+    N * Factor;
+update_calc_state(N, #div{divisor = Divisor}) ->
+    N / Divisor;
+update_calc_state(N, #get{}) -> N.
