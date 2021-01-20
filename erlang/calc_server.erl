@@ -20,6 +20,6 @@ update_calc_state(N, #inc{increment = Increment}) ->
     N + Increment;
 update_calc_state(N, #mult{factor = Factor}) ->
     N * Factor;
-update_calc_state(N, #div{divisor = Divisor}) ->
+update_calc_state(N, #divide{divisor = Divisor}) ->
     N / Divisor;
 update_calc_state(N, #get{}) -> N.
