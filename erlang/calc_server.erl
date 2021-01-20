@@ -35,4 +35,5 @@ init(_) -> {ok, 0}.
 % State = term()
 % Result = {noreply,NewState} | 
 
-handle_cast(#reset{}, )
+handle_cast(Message, N) -> {noreply, update_calc_state(N, Message)}.
+
