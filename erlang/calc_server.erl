@@ -37,10 +37,11 @@ update_calc_state(N, #inc{increment = Increment}) ->
 update_calc_state(N, #mult{factor = Factor}) ->
     N * Factor;
 update_calc_state(N, #divide{divisor = Divisor}) ->
-    N / Divisor;
+    N / Divisor.
 % muß auch noch Nachricht zurückschicken:
 % #get{} ist anders als die anderen
-update_calc_state(N, #get{}) -> N.
+% wird nicht benötigt, da es immer bei handle_call aufschlägt:
+% update_calc_state(N, #get{}) -> N.
 
 % InitialN kommt von gen_server:start
 init(InitialN) -> {ok, InitialN}. % gibt initialen Zustand zurück
