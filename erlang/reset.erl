@@ -11,6 +11,7 @@ format_process_loop() ->
                    format_process_loop()
     end.
 
+
 inc_loop2(N) ->
     receive
         reset -> io:format("resetting~n"),
@@ -24,4 +25,8 @@ inc_process() ->
     % spawn(intro_mike, inc_loop, [0]).
     spawn(?MODULE, inc_loop2, [0]).
 
+% Calc
+-record(reset, {}).
+-record(inc, {inc, { increment :: number() }}).
+-record(mult, {inc, { factor :: number() }}).
 
