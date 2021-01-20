@@ -6,16 +6,14 @@
 % Hier eine Implementierung des Interface gen_server
 % Schnittstelle für Callbacks
 -export([init/1, handle_cast/2, handle_call/3,
-         start/1, calc_reset/1, calc_inc/2, calc_mult/2, calc_div/2, calc_get/1]).
+         start/0, calc_reset/1, calc_inc/2, calc_mult/2, calc_div/2, calc_get/1]).
 
-start(InitialValue) ->
-    {ok, Pid} = gen_server:start(?MODULE, InitialValue, []),
-    Pid.
+start() ->
+    gen_server:start(?MODULE, 0, []).
                            %  ^^^^^^^^^^^^ wird zum  Argument von init
 % macht einen neuen Prozess, ruft dort init auf, startet Schleife, die
 % Nachrichten empfängt
 
--record(state, {initial :: number(), current :: number()}).
 
 -record(reset, {}).
 -record(inc, {increment :: number()}).
@@ -29,26 +27,24 @@ calc_mult(Pid, Factor) -> gen_server:cast(Pid, #mult{factor = Factor}).
 calc_div(Pid, Divisor) -> gen_server:cast(Pid, #divide{divisor = Divisor}).
 calc_get(Pid) -> gen_server:call(Pid, #get{}).
 
--type message() :: #reset{} | #inc{} 
+-type message() :: #reset{} | #inc{} 
                  | #mult{} | #divide{} | #get{}.
 
--spec update_calc_state(#state{}, message()) -> #state{}.
-update_calc_state(#state{initial = Initial}, #reset{}) ->
-    #state{initial = Initial, current = Initial};
-update_calc_state(#state{initial = Initial, current = Current}, #inc{increment = Increment}) ->
-    #state{initial = Initial, current = Current + Increment};
-update_calc_state(#state{initial = Initial, current = Current}, #mult{factor = Factor}) ->
-    #state{initial = Initial, current = Current * Factor};
-update_calc_state(#state{initial = Initial, current = Current}, #divide{divisor = Divisor}) ->
-    #state{initial = Initial, current = Current / Divisor}.
-
+-spec update_calc_state(number(), message()) -> number().
+update_calc_state(_N, #reset{}) -> 0;
+update_calc_state(N, #inc{increment = Increment}) ->
+    N + Increment;
+update_calc_state(N, #mult{factor = Factor}) ->
+    N * Factor;
+update_calc_state(N, #divide{divisor = Divisor}) ->
+    N / Divisor.
 % muß auch noch Nachricht zurückschicken:
 % #get{} ist anders als die anderen
 % wird nicht benötigt, da es immer bei handle_call aufschlägt:
 % update_calc_state(N, #get{}) -> N.
 
 % InitialN kommt von gen_server:start
-init(InitialN) -> {ok, #state{initial = InitialN, current = InitialN}}. % gibt initialen Zustand zurück
+init(InitialN) -> {ok, InitialN}. % gibt initialen Zustand zurück
 
 % Module:handle_cast(Request, State) -> Result
 % Types
@@ -69,6 +65,8 @@ handle_cast(Message, N) -> {noreply, update_calc_state(N, Message)}.
 % State = term()
 % Result = {reply,Reply,NewState}
 
-handle_call(#get{}, _From, N) ->
-    #state{current = Current} = N,
-    {reply, Current, Current}.
+handle_call(#get{}, _From, N) -> 
+    Reply = N,
+    NewState = N,
+    {reply, Reply, NewState}.
+

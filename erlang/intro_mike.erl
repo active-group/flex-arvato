@@ -4,7 +4,10 @@
     d1/0, d2/0, run_over_dillo/1, p1/0, p2/0, run_over_animal/1,
     animal_weight/1, list_sum/1, list_product/1,
     animal_weights/1, run_over_animals/1, highway/0, list_map/2,
-    rev/1, rev/2, format_process/0, inc_process/0, inc_loop/1]).
+    rev/1, rev/2, format_process/0, inc_process/0, inc_loop/1,
+    calc_process/0, calc_loop/1, 
+    calc_inc/2, calc_reset/1, calc_mult/2, calc_get/1, calc_div/2,
+    calc_supervisor/0]).
 
 % Atome: mike, stefan, error
 % Liste: [1,2,3]
@@ -213,6 +216,8 @@ format_process_loop() ->
 
 inc_loop(N) ->
     receive
+        reset -> io:format("resetting~n"),
+                 inc_loop(0);
         Inc -> io:format("incrementing ~w by ~w~n", [N, Inc]),
                inc_loop(N + Inc)
     end.
@@ -221,3 +226,63 @@ inc_process() ->
     % spawn(fun () -> inc_loop(0) end).
     % spawn(intro_mike, inc_loop, [0]).
     spawn(?MODULE, inc_loop, [0]).
+
+% Der Calc-Prozess akzeptiert eine der folgenden Nachrichten:
+% - eine Reset-Nachricht
+% - eine Inkrement-Nachricht
+% - eine Multiplikations-Nachricht
+
+-record(reset, {}).
+-record(inc, {increment :: number()}).
+-record(mult, {factor :: number()}).
+-record(divide, {divisor :: number()}).
+-record(get, {pid :: pid()}).
+
+% Wiederkehrende Elemente:
+% - Schleife, die Nachrichten empfängt, verarbeitet, Zustand mitführt
+% - das in einem neuen Prozeß
+% - ... ggf. mit einem lokalen oder globalen Namen
+
+calc_loop(N) ->
+    receive
+        #reset{} -> calc_loop(0);
+        #inc{increment = Increment} -> calc_loop(N + Increment);
+        #mult{factor = Factor} -> calc_loop(N * Factor);
+        #divide{divisor = Divisor} -> calc_loop(N / Divisor);
+        #get{pid = Pid} -> Pid ! N,
+                           calc_loop(N)
+    end.
+
+calc_inc(CalcPid, Inc) ->
+    CalcPid ! #inc{increment = Inc}.
+
+calc_reset(CalcPid) -> CalcPid ! #reset{}.
+
+calc_mult(CalcPid, Factor) ->
+    CalcPid ! #mult{factor = Factor}.
+
+calc_div(CalcPid, Divisor) ->
+    CalcPid ! #divide{divisor = Divisor}.
+
+calc_get(CalcPid) ->
+    CalcPid ! #get{pid = self()},
+    receive N -> N end.
+
+% "Supervisor"
+calc_supervisor() ->
+    process_flag(trap_exit, true),
+    Pid = spawn_link(?MODULE, calc_loop, [0]),
+    % wenn Pid stirbt, sterbe auch ich (und umgekehrt)
+    % link(Pid),
+    % wenn ein gelinkter Prozess stirbt, bekomme ich eine Nachricht
+    % {'EXIT', Pid, Exception}
+    register(calc_service, Pid),
+    global:register_name(calc_service, Pid),
+    receive
+        {'EXIT', _FromPid, _Reason} -> calc_supervisor()
+        % _Msg -> calc_supervisor() % Mmmhh ...
+    end.
+
+calc_process() -> 
+    spawn(?MODULE, calc_supervisor, []),
+    ok.
