@@ -1,6 +1,8 @@
 -module(calc_server).
 
 -behaviour(gen_server).
+% gen_server ist Teil des OTP-Frameworks, das bei Erlang dabei ist
+% Open Telephone Platform
 -export([init/1, handle_cast/2, handle_call/3]).
 
 % Schnittstelle für Callbacks
@@ -48,5 +50,5 @@ handle_cast(Message, N) -> {noreply, update_calc_state(N, Message)}.
 % State = term()
 % Result = {reply,Reply,NewState}
 
-handle_call(#get{}, _From, N) -> {reply, N, N}.
+handle_call(#get{}, _From, N) -> {reply, N, N + 1}.
 
