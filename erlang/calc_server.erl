@@ -5,10 +5,12 @@
 % Open Telephone Platform
 % Hier eine Implementierung des Interface gen_server
 % Schnittstelle für Callbacks
--export([init/1, handle_cast/2, handle_call/3]).
+-export([init/1, handle_cast/2, handle_call/3,
+         start/0]).
 
 start() ->
-    gen_server:start(?MODULE, unimportant, [])
+    gen_server:start(?MODULE, unimportant, []).
+                           %  ^^^^^^^^^^^^ wird zum  Argument von init
 
 
 -record(reset, {}).
@@ -32,7 +34,7 @@ update_calc_state(N, #divide{divisor = Divisor}) ->
 % #get{} ist anders als die anderen
 update_calc_state(N, #get{}) -> N.
 
-init(_) -> {ok, 0}.
+init(InitialN) -> {ok, Initia}.
 
 % Module:handle_cast(Request, State) -> Result
 % Types
