@@ -22,6 +22,10 @@ start() ->
 -record(get, {pid :: pid()}).
 
 calc_reset(Pid) -> gen_server:cast(Pid, #reset{}).
+calc_inc(Pid, Increment) -> gen_server:cast(Pid, #inc{increment = Increment}).
+calc_mult(Pid, Factor) -> gen_server:cast(Pid, #mult{factor = Factor}).
+calc_div(Pid, Divisor) -> gen_server:cast(Pid, #divide{divisor = Divisor}).
+calc_get(Pid) -> gen_server:call(Pid, #get{pid = self()}).
 
 -type message() :: #reset{} | #inc{} 
                  | #mult{} | #divide{} | #get{}.
