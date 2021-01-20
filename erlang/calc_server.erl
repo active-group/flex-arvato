@@ -6,7 +6,7 @@
 % Hier eine Implementierung des Interface gen_server
 % Schnittstelle für Callbacks
 -export([init/1, handle_cast/2, handle_call/3,
-         start/0]).
+         start/0, calc_reset/1]).
 
 start() ->
     gen_server:start(?MODULE, 0, []).
@@ -14,13 +14,14 @@ start() ->
 % macht einen neuen Prozess, ruft dort init auf, startet Schleife, die
 % Nachrichten empfängt
 
-calc_reset(Pid) -> gen_server:cast(Pid, #reset{}).
 
 -record(reset, {}).
 -record(inc, {increment :: number()}).
 -record(mult, {factor :: number()}).
 -record(divide, {divisor :: number()}).
 -record(get, {pid :: pid()}).
+
+calc_reset(Pid) -> gen_server:cast(Pid, #reset{}).
 
 -type message() :: #reset{} | #inc{} 
                  | #mult{} | #divide{} | #get{}.
