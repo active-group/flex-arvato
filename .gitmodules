@@ -1,0 +1,9 @@
+[submodule "accounts"]
+	path = accounts
+	url = git@github.com:active-group/flex-arvato-accounts
+[submodule "transactions"]
+	path = transactions
+	url = git@github.com:active-group/flex-arvato-transactions
+[submodule "statements"]
+	path = statements
+	url = git@github.com:active-group/flex-arvato-statements
