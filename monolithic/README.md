@@ -18,3 +18,11 @@ $ rebar3 shell
 ```
 
 The web-frontend is served at http://localhost:8000/
+
+## Standalone Docker setup
+
+```
+cd .devcontainer
+docker build -t erlang-flex .
+```
+
