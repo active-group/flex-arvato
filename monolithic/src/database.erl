@@ -14,23 +14,23 @@
 
 %% destroy tables in case they already existed
 destroy_tables() ->
-    mnesia:del_table_copy(person, node()),
-    mnesia:del_table_copy(transaction, node()),
-    mnesia:del_table_copy(account, node()),
-    mnesia:del_table_copy(table_id, node()).
+    mnesia:delete_table(person),
+    mnesia:delete_table(transaction),
+    mnesia:delete_table(account),
+    mnesia:delete_table(table_id).
 
 create_tables() ->
-    mnesia:create_table(person, [{attributes, [id,firstname,surname]}]),
-    mnesia:create_table(transaction, [{attributes, [id, timestamp, from_acc_nr, to_acc_nr, amount]}]),
-    mnesia:create_table(account, [{attributes, [account_number, person_id, amount]}]),
-    mnesia:create_table(table_id, [{record_name, table_id}, {attributes, record_info(fields, table_id)}]).
-
+    {atomic, ok} = mnesia:create_table(person, [{attributes, [id,firstname,surname]}]),
+    {atomic, ok} = mnesia:create_table(transaction, [{attributes, [id, timestamp, from_acc_nr, to_acc_nr, amount]}]),
+    {atomic, ok} = mnesia:create_table(account, [{attributes, [account_number, person_id, amount]}]),
+    {atomic, ok} = mnesia:create_table(table_id, [{record_name, table_id}, {attributes, record_info(fields, table_id)}]).
 
 init_database() ->
     mnesia:create_schema([node()]),
     mnesia:start(),
-    destroy_tables(),
-    create_tables(),
+    mnesia:transaction(fun destroy_tables/0),
+    mnesia:transaction(fun create_tables/0),
+    mnesia:wait_for_tables([person, transaction, account, table_id], 1000),
     ok.
 
 write(Table, Tuple) ->
