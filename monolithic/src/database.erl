@@ -26,12 +26,14 @@ destroy_tables() ->
 % unfortunately, delete_table doesn't always work such that create_table doesn't fail, so don't check return value
 create_tables() ->
     mnesia:create_table(person, [{attributes, [id,firstname,surname]}]),
-    mnesia:clear_table(person),
     mnesia:create_table(transaction, [{attributes, [id, timestamp, from_acc_nr, to_acc_nr, amount]}]),
-    mnesia:clear_table(account),
     mnesia:create_table(account, [{attributes, [account_number, person_id, amount]}]),
+    mnesia:create_table(table_id, [{record_name, table_id}, {attributes, record_info(fields, table_id)}]).
+
+clear_tables() ->
+    mnesia:clear_table(person),
     mnesia:clear_table(account),
-    mnesia:create_table(table_id, [{record_name, table_id}, {attributes, record_info(fields, table_id)}]),
+    mnesia:clear_table(account),
     mnesia:clear_table(table_id).
 
 init_database() ->
@@ -40,6 +42,7 @@ init_database() ->
     destroy_tables(),
     create_tables(),
     ok = mnesia:wait_for_tables([person, transaction, account, table_id], 5000),
+    mnesia:transaction(fun clear_tables/0),
     ok.
 
 write(Table, Tuple) ->
