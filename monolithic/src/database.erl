@@ -7,10 +7,13 @@
          put_person/1, get_person/1, get_all_persons/0, 
          put_transaction/1, get_transaction/1, get_all_transactions/0, get_all_transactions/1, 
          unique_account_number/0,unique_tx_id/0, unique_person_id/0,
+         put_event/1, get_all_events/0, get_events_from/1,
          atomically/1]).
 
 %% id-table for atomic id increment
 -record(table_id, {table_name :: mnesia:table(), last_id :: non_neg_integer()}).
+
+-record(event, {number :: non_neg_integer(), payload :: term()}).
 
 %% destroy tables in case they already existed
 destroy_tables() ->
@@ -21,27 +24,31 @@ destroy_tables() ->
     mnesia:delete_table(account),
     mnesia:del_table_copy(account, node()),
     mnesia:delete_table(table_id),
-    mnesia:del_table_copy(table_id, node()).
+    mnesia:del_table_copy(table_id, node()),
+    mnesia:delete_table(event),
+    mnesia:del_table_copy(event, node()).
 
 % unfortunately, delete_table doesn't always work such that create_table doesn't fail, so don't check return value
 create_tables() ->
     mnesia:create_table(person, [{attributes, [id,firstname,surname]}]),
     mnesia:create_table(transaction, [{attributes, [id, timestamp, from_acc_nr, to_acc_nr, amount]}]),
     mnesia:create_table(account, [{attributes, [account_number, person_id, amount]}]),
-    mnesia:create_table(table_id, [{record_name, table_id}, {attributes, record_info(fields, table_id)}]).
+    mnesia:create_table(table_id, [{record_name, table_id}, {attributes, record_info(fields, table_id)}]),
+    mnesia:create_table(event, [{attributes, [id, payload]}]).
 
 clear_tables() ->
     mnesia:clear_table(person),
     mnesia:clear_table(account),
     mnesia:clear_table(account),
-    mnesia:clear_table(table_id).
+    mnesia:clear_table(table_id),
+    mnesia:clear_table(event).
 
 init_database() ->
     mnesia:create_schema([node()]),
     mnesia:start(),
     destroy_tables(),
     create_tables(),
-    ok = mnesia:wait_for_tables([person, transaction, account, table_id], 5000),
+    ok = mnesia:wait_for_tables([person, transaction, account, table_id, event], 5000),
     mnesia:transaction(fun clear_tables/0),
     ok.
 
@@ -129,6 +136,29 @@ unique_person_id() -> mnesia:dirty_update_counter(table_id, person, 1).
 
 -spec unique_tx_id() -> unique_id().
 unique_tx_id() -> mnesia:dirty_update_counter(table_id, transaction, 1).
+
+-spec unique_event_number() -> non_neg_integer().
+unique_event_number() -> mnesia:dirty_update_counter(table_id, event, 1).
+
+put_event(Payload) ->
+    Number = unique_event_number(),
+    write(event, {Number, Payload}),
+    #event{number = Number, payload = Payload}.
+
+deserialize_event({Number, Payload}) ->
+    #event{number = Number, payload = Payload}.
+
+get_all_events() ->
+    read_all(event, fun deserialize_event/1).
+
+get_events_from(Number) ->
+    {atomic, Res} = mnesia:transaction(fun() -> mnesia:select(event,
+                                                              [{'$1',
+                                                                [{'>=', {element, #event.number, '$1'}, Number}],
+                                                                ['$_']}])
+                                       end),
+    Events = lists:map(fun (Tuple) -> deserialize_event(erlang:delete_element(1, Tuple)) end, Res),
+    lists:sort(fun (#event{number = Number1}, #event{number = Number2}) -> Number1 =< Number2 end, Events).
 
 -spec atomically(fun(() -> Ret)) -> Ret.
 atomically(Fun) ->
