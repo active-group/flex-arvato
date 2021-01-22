@@ -2,7 +2,7 @@
 
 -module(business_logic).
 -include("data.hrl").
--export([open_account/2, get_account/1, get_person/1, transfer/3, sort_tx/1, get_transactions/1 ]).
+-export([open_account/2, get_account/1, get_person/1, transfer/3, sort_tx/1, get_transactions/1, get_transactions_from/1 ]).
 
 
 %% Opens an account, that is creates a new account containing a new person 
@@ -42,6 +42,10 @@ make_account(Person) ->
 -spec get_transactions(unique_id()) -> list(#transaction{}).
 get_transactions(Id) ->
      database:get_all_transactions(Id).
+
+-spec get_transactions_from(unique_id()) -> list(#transaction{}).
+get_transactions_from(Id) ->
+     database:get_transactions_from(Id).
 
 %% Takes a sender & receiver account number and an amount and transfers 
 %% that amount from sender to receiver.

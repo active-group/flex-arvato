@@ -5,7 +5,7 @@
 -export([init_database/0,
          put_account/1, get_account/1, get_all_accounts/0,
          put_person/1, get_person/1, get_all_persons/0, 
-         put_transaction/1, get_transaction/1, get_all_transactions/0, get_all_transactions/1, 
+         put_transaction/1, get_transaction/1, get_all_transactions/0, get_all_transactions/1, get_transactions_from/1, 
          unique_account_number/0,unique_tx_id/0, unique_person_id/0,
          put_event/1, get_all_events/0, get_events_from/1,
          atomically/1]).
@@ -125,6 +125,17 @@ get_all_transactions(AccountNr) ->
                                 {'==', {element, #transaction.to_acc_nr, '$1'}, AccountNr}}],
                             ['$_']}]) 
           end,
+    {atomic, Res} = mnesia:transaction(Fun),
+    lists:map(fun (Tuple) -> deserialize_transaction(erlang:delete_element(1, Tuple)) end, Res).
+
+-spec get_transactions_from(unique_id()) -> list(#transaction{}).
+get_transactions_from(Id) ->
+    Fun = fun() ->
+            mnesia:select(transaction,
+                          [{'$1',
+                            [{'>=', {element, #transaction.id, '$1'}, Id}],
+                            ['$_']}])
+                      end,
     {atomic, Res} = mnesia:transaction(Fun),
     lists:map(fun (Tuple) -> deserialize_transaction(erlang:delete_element(1, Tuple)) end, Res).
 
